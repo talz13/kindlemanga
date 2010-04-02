@@ -54,6 +54,7 @@ class KindleMangaFrame ( wx.Frame ):
 		bSizer6 = wx.BoxSizer( wx.VERTICAL )
 		
 		fgSizer3 = wx.FlexGridSizer( 1, 3, 0, 0 )
+		fgSizer3.AddGrowableCol( 1 )
 		fgSizer3.SetFlexibleDirection( wx.BOTH )
 		fgSizer3.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
@@ -62,7 +63,7 @@ class KindleMangaFrame ( wx.Frame ):
 		fgSizer3.Add( self.m_staticText4, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
 		
 		self.m_textCtrl_outDir = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		fgSizer3.Add( self.m_textCtrl_outDir, 0, wx.ALL, 5 )
+		fgSizer3.Add( self.m_textCtrl_outDir, 0, wx.BOTTOM|wx.EXPAND|wx.RIGHT|wx.TOP, 5 )
 		
 		self.m_button_outDir = wx.Button( self.m_panel2, wx.ID_ANY, u"Browse", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer3.Add( self.m_button_outDir, 0, wx.ALL, 5 )
@@ -72,6 +73,7 @@ class KindleMangaFrame ( wx.Frame ):
 		sbSizer2 = wx.StaticBoxSizer( wx.StaticBox( self.m_panel2, wx.ID_ANY, wx.EmptyString ), wx.VERTICAL )
 		
 		fgSizer4 = wx.FlexGridSizer( 2, 2, 0, 0 )
+		fgSizer4.AddGrowableCol( 1 )
 		fgSizer4.SetFlexibleDirection( wx.BOTH )
 		fgSizer4.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 		
@@ -81,7 +83,7 @@ class KindleMangaFrame ( wx.Frame ):
 		
 		self.m_textCtrl_series = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_textCtrl_series.SetMaxLength( 100 ) 
-		fgSizer4.Add( self.m_textCtrl_series, 0, wx.ALIGN_CENTER_VERTICAL, 5 )
+		fgSizer4.Add( self.m_textCtrl_series, 0, wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
 		
 		self.m_staticText2 = wx.StaticText( self.m_panel2, wx.ID_ANY, u"Volume / Chapter:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText2.Wrap( -1 )
@@ -89,7 +91,7 @@ class KindleMangaFrame ( wx.Frame ):
 		
 		self.m_textCtrl_volume = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_textCtrl_volume.SetMaxLength( 10 ) 
-		fgSizer4.Add( self.m_textCtrl_volume, 0, wx.ALIGN_CENTER_VERTICAL, 5 )
+		fgSizer4.Add( self.m_textCtrl_volume, 0, wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
 		
 		sbSizer2.Add( fgSizer4, 1, wx.EXPAND, 5 )
 		

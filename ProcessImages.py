@@ -1,7 +1,7 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
 
-__author__="b010396"
+__author__="Jeff Byrom"
 __date__ ="$Jan 22, 2010 2:07:34 PM$"
 
 import Image

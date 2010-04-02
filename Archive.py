@@ -1,8 +1,8 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
 
-#__author__="b010396"
-#__date__ ="$Jan 20, 2010 12:54:44 PM$"
+__author__="Jeff Byrom"
+__date__ ="$Jan 20, 2010 12:54:44 PM$"
 
 import zipfile
 import UnRAR2

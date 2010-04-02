@@ -1,8 +1,8 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
 
-#__author__="b010396"
-#__date__ ="$Jan 21, 2010 9:40:00 AM$"
+__author__="Jeff Byrom"
+__date__ ="$Jan 21, 2010 9:40:00 AM$"
 
 class FileObject:
     dir = None

@@ -1,5 +1,5 @@
-#__author__="b010396"
-#__date__ ="$Apr 2, 2010 8:54:00 AM$"
+__author__="Jeff Byrom"
+__date__ ="$Apr 2, 2010 8:54:00 AM$"
 
 class FileJob:
 
