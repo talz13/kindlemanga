@@ -6,3 +6,7 @@
 ^Archive\.pyc$
 ^nbproject/project\.properties$
 ^nbproject/project\.xml$
+^kindlemanga\.rar$
+^dist/*
+^build/*
+^msvcp90\.dll$
