@@ -1,6 +1,3 @@
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-
 __author__="Jeff Byrom"
 __date__ ="$Jan 22, 2010 2:07:34 PM$"
 
@@ -8,24 +5,16 @@ import Image
 import StringIO
 import FileObject
 
-#targetHeight = targetHeight
-#maxWidth = 600
-
 def ProcessAndSave(imageFileList, targetHeight, maxWidth):
     imagecount = 0
     print 'files:'
     for index, file in enumerate(imageFileList):
-        #print file.filename
-        #filedate = list(file.datetime[0:6])
-        #file.PrintInfo()
         if (isinstance(file.data, Image.Image)):
             tmpImage = file.data
         else:
             tmpImage = Image.open(StringIO.StringIO(file.data))
         width = tmpImage.getbbox()[2]
         height = tmpImage.getbbox()[3]
-        #print width,
-        #print height
 
         splitImages = None
 
@@ -33,8 +22,6 @@ def ProcessAndSave(imageFileList, targetHeight, maxWidth):
             scalingRatio = float(targetHeight) / height
             newHeight = targetHeight
             newWidth = MultipleOf4(width * scalingRatio)
-            #tmpImage = tmpImage.resize(tuple([newWidth, newHeight]), Image.ANTIALIAS)
-            #tmpImage.show()
         else:
             scalingRatio = 1
             newHeight = targetHeight
@@ -89,12 +76,7 @@ def SplitImageHoriz(image, width, height, maxWidth):
     imageRight = Image.new("L", tuple([width / 2, height]), 255)
     imageLeft = Image.new("L", tuple([width / 2, height]), 255)
 
-    #leftSide = (maxWidth - (width / 2)) / 2
-    #imageRight.paste(image.crop(rightBox), tuple([leftSide, 0]))
     imageRight.paste(image.crop(rightBox), tuple([0, 0]))
-    #imageLeft.paste(image.crop(leftBox), tuple([leftSide, 0]))
     imageLeft.paste(image.crop(leftBox), tuple([0, 0]))
-
-    #imageRight = image.crop(rightBox)
-    #imageLeft = image.crop(leftBox)
+    
     return [imageRight, imageLeft]

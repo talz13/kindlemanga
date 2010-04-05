@@ -1,6 +1,3 @@
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-
 __author__="Jeff Byrom"
 __date__ ="$Jan 20, 2010 12:54:44 PM$"
 
@@ -19,9 +16,6 @@ class Archive:
     ext = None
     arc = None
     tmpPath = None
-    
-    #def __init__(self):
-    #    print''
 
     def ArchiveFile(self, filename):
         self.filename = filename
@@ -38,9 +32,6 @@ class Archive:
 
     def CheckImageExtension(self, filename):
         validExtension = False
-        #print filename
-        #print os.path.splitext(filename)[1].lower()
-        #print imageExtensions
         if (os.path.splitext(filename)[1].lower() in imageExtensions):
             validExtension = True
         return validExtension
@@ -54,7 +45,6 @@ class Archive:
             for info in infolist:
                 if (os.path.splitext(info.filename)[1].lower() == '.zip'):
                     nestedArchive = zipfile.ZipFile(StringIO.StringIO(archive.open(info).read()), 'r')
-                    #tmpFiles = self.ReadZipFiles(nestedArchive, depth + 1)
                     files += self.ReadZipFiles(nestedArchive, depth + 1)
                 elif (os.path.splitext(info.filename)[1] == '.rar'):
                     nestedArchive = UnRAR2.RarFile(StringIO.StringIO(archive.open(info).read()), 'r')
@@ -87,9 +77,6 @@ class Archive:
         files = []
         if (self.ext == '.zip'):
             files = self.ReadZipFiles(self.arc, 0)
-        #for file in files:
-        #    print file
-        #    print file.filename
         if (self.ext == '.rar'):
             files = self.ReadRarFiles(self.arc, 0)
         return files

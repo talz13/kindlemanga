@@ -1,34 +1,19 @@
+__author__="Jeff Byrom"
+__date__ ="$Jan 20, 2010 12:54:44 PM$"
+
 import os
 import sys
 import wx
 import Archive
-import FileObject
 import FileJob
 import ProcessImages
 import KindleMangaFile
 import KindleMangaLayout
-#import wx.lib.filebrowsebutton
-
-#app = wx.App(False)
-#frame = MainWindow(None, "Sample editor")
-#app.MainLoop()
-
 
 class MainFrame(KindleMangaLayout.KindleMangaFrame):
 
     fileList = []
     outDir = ''
-
-    #class newOutput:
-    #    #wxTextCtrl_display = None
-    #    #
-    #    #def __init__(self, wxTextCtrl_display):
-    #    #    self.wxTextCtrl_display = wxTextCtrl_display
-    #    #
-    #    def write(self, string):
-    #        self.m_textCtrl_console.AppendText(text)
-    #out = newOutput
-    #sys.stdout = newOutput()
 
     def __init__(self, parent):
         KindleMangaLayout.KindleMangaFrame.__init__(self, parent)
@@ -113,14 +98,7 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
     def ProcessAll(self, fileJobList, outDir):
         unknownVol = 0;
         for job in fileJobList:
-            #arg = 'none'
-            #print 'arg: ' + arg
-            #if (not job.endswith('kindlemanga.py') and not job.endswith('kindlemanga')):
             filename = job.getFilename()
-            #filename = 'C:\\pictures2.rar'
-            #filename = 'C:\\volume_001.zip'
-            #filename = 'C:\\Highschool_of_the_Dead_[XLG]_v3_c10_LQ.zip'
-            #filename = 'C:\\Highschool_of_the_Dead_[XLG]_v3_c10_LQ.rar'
             print 'filename: ' + filename
 
             filepath = os.path.split(filename)
@@ -135,11 +113,9 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
             if (outDir != ''):
                 tempDirName = outDir
             else:
-                #tempDirName = 'kindleMangaTemp'
                 tempDirName = os.getenv('APPDATA') + '\\' + 'kindleMangaTemp'
 
-            #tempDir = os.getenv('APPDATA') + '\\' + tempDirName + '\\'
-            tempDir = tempDirName + '\\' # + seriesName + '_' + ('%03d' % volume)
+            tempDir = tempDirName + '\\' # + seriesName
             print tempDir
             os.chdir(tempDir)
             print os.getcwd()
@@ -189,66 +165,3 @@ class Gui(wx.App):
 print 'starting gui...'
 app = Gui(0)
 app.MainLoop()
-
-
-class newOutput:
-    wxTextCtrl_display = None
-
-    def __init__(self, wxTextCtrl_display):
-        self.wxTextCtrl_display = wxTextCtrl_display
-
-    def write(self, string):
-        self.wxTextCtrl_display.AppendText(text)
-
-#class MainWindow(wx.Frame):
-#    def __init__(self, parent, title):
-#        wx.Frame.__init__(self, parent, title = title, size = (200,200))
-#        #self.control = wx.TextCtrl(self, style = wx.TE_MULTILINE)
-#        self.CreateStatusBar()
-#
-#        filemenu = wx.Menu()
-#        menuOpen = filemenu.Append(wx.ID_OPEN, "&Open", "Open a file")
-#        menuAbout = filemenu.Append(wx.ID_ABOUT, "&About", "Information about this program")
-#        menuExit = filemenu.Append(wx.ID_EXIT, "E&xit", "Terminate the program")
-#
-#        menuBar = wx.MenuBar()
-#        menuBar.Append(filemenu, "&File")
-#        self.SetMenuBar(menuBar)
-#
-#        # panel to hold selector box:
-#        selectorPanel = wx.Panel(self)
-#        box1 = wx.BoxSizer(wx.VERTICAL)
-#
-#        box1Text = wx.StaticText(selectorPanel, -1, "Choose your file")
-#        box1Text.SetSize(box1Text.GetBestSize())
-#        box1.Add(box1Text, 0, wx.ALL, 10)
-#
-#        fileBrowseButton = wx.lib.filebrowsebutton.FileBrowseButton(selectorPanel, labelText='Select a manga archive:', fileMask='*.rar;*.zip')
-#
-#        selectorPanel.SetSizer(box1)
-#        selectorPanel.Layout()
-#
-#        self.Bind(wx.EVT_MENU, self.OnOpen, menuOpen)
-#        self.Bind(wx.EVT_MENU, self.OnAbout, menuAbout)
-#        self.Bind(wx.EVT_MENU, self.OnExit, menuExit)
-#
-#        self.Show(True)
-#
-#    def OnOpen(self, e):
-#        self.dirname = ''
-#        dlg = wx.FileDialog(self, "Choose a file", self.dirname, '', 'Rar, zip files (*.rar;*.zip)|*.rar;*.zip', wx.OPEN)
-#        if dlg.ShowModal() == wx.ID_OK:
-#            self.filename = dlg.GetFilename()
-#            self.dirname = dlg.GetDirectory()
-#            f = open(os.path.join(self.dirname, self.filename), 'r')
-#            self.control.SetValue(f.read())
-#            f.close()
-#        dlg.Destroy()
-#
-#    def OnAbout(self, e):
-#        dlg = wx.MessageDialog(self, "A small text editor", "About Sample Editor", wx.OK)
-#        dlg.ShowModal()
-#        dlg.Destroy()
-#
-#    def OnExit(self, e):
-#        self.Close(True)
