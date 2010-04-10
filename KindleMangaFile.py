@@ -16,7 +16,9 @@ def WriteMangaFiles():
     placeFile.write(time.strftime('#%a %b %d %H:%M:%S GMT %Y', date) + '\n')
     placeFile.write('LAST=/mnt/us/pictures/' + folder + '/0000.gif' + '\n')
     placeFile.close()
+    print placeFilename
 
     mangaFile = open(mangaFilename, 'wb')
     mangaFile.write('\0')
     mangaFile.close()
+    print mangaFilename
