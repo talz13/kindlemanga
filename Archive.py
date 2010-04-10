@@ -61,10 +61,10 @@ class Archive:
         else:
             extracts = archive.read_files()
             for file in extracts:
-                if (os.path.splitext(file[0].filename)[1].lower() == '.zip'):
+                if (os.path.splitext(file[0].filename)[1].lower() == '.zip' or os.path.splitext(file[0].filename)[1].lower() == '.cbz'):
                     nestedArchive = UnRAR2.RarFile(StringIO.StringIO(file[1]))
                     files += self.ReadZipFiles(nestedArchive, depth + 1)
-                elif (os.path.splitext(file[0].filename)[1].lower() == '.rar'):
+                elif (os.path.splitext(file[0].filename)[1].lower() == '.rar' or os.path.splitext(file[0].filename)[1].lower() == '.cbr'):
                     nestedArchive = UnRAR2.RarFile(StringIO.StringIO(file[1]))
                     files += self.ReadRarFiles(nestedArchive, depth + 1)
                 else:
