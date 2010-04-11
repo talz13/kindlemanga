@@ -24,7 +24,6 @@ class KindleMangaFrame ( wx.Frame ):
 		
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
-		self.m_statusBar1 = self.CreateStatusBar( 1, wx.ST_SIZEGRIP, wx.ID_ANY )
 		self.m_menubar1 = wx.MenuBar( 0 )
 		self.m_menu1 = wx.Menu()
 		self.m_menuItem_open = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"&Open"+ u"\t" + u"Ctrl + O", wx.EmptyString, wx.ITEM_NORMAL )
@@ -48,6 +47,21 @@ class KindleMangaFrame ( wx.Frame ):
 		fgSizer1.Add( bSizer2, 1, wx.EXPAND, 5 )
 		
 		bSizer6 = wx.BoxSizer( wx.VERTICAL )
+		
+		fgSizer41 = wx.FlexGridSizer( 1, 3, 0, 0 )
+		fgSizer41.SetFlexibleDirection( wx.BOTH )
+		fgSizer41.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.m_button_add = wx.Button( self.m_panel2, wx.ID_ANY, u"Add Files", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer41.Add( self.m_button_add, 0, wx.ALL, 5 )
+		
+		self.m_button_rem = wx.Button( self.m_panel2, wx.ID_ANY, u"Remove", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer41.Add( self.m_button_rem, 0, wx.ALL, 5 )
+		
+		self.m_button_proc = wx.Button( self.m_panel2, wx.ID_ANY, u"Process", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer41.Add( self.m_button_proc, 0, wx.ALL, 5 )
+		
+		bSizer6.Add( fgSizer41, 0, 0, 5 )
 		
 		fgSizer3 = wx.FlexGridSizer( 1, 3, 0, 0 )
 		fgSizer3.AddGrowableCol( 1 )
@@ -114,6 +128,19 @@ class KindleMangaFrame ( wx.Frame ):
 		self.m_textCtrl_console = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.TE_AUTO_URL|wx.TE_MULTILINE|wx.TE_READONLY|wx.TE_WORDWRAP )
 		bSizer6.Add( self.m_textCtrl_console, 1, wx.ALL|wx.EXPAND, 5 )
 		
+		fgSizer5 = wx.FlexGridSizer( 1, 1, 0, 0 )
+		fgSizer5.SetFlexibleDirection( wx.BOTH )
+		fgSizer5.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.m_gauge_progress = wx.Gauge( self.m_panel2, wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL )
+		self.m_gauge_progress.SetValue( 0 ) 
+		self.m_gauge_progress.SetMinSize( wx.Size( 300,15 ) )
+		self.m_gauge_progress.SetMaxSize( wx.Size( 300,15 ) )
+		
+		fgSizer5.Add( self.m_gauge_progress, 1, wx.EXPAND|wx.ALIGN_RIGHT, 5 )
+		
+		bSizer6.Add( fgSizer5, 0, wx.ALIGN_RIGHT, 5 )
+		
 		fgSizer1.Add( bSizer6, 1, wx.EXPAND, 5 )
 		
 		self.m_panel2.SetSizer( fgSizer1 )
@@ -124,6 +151,8 @@ class KindleMangaFrame ( wx.Frame ):
 		self.SetSizer( bSizer1 )
 		self.Layout()
 		self.m_toolBar1 = self.CreateToolBar( wx.TB_HORIZONTAL, wx.ID_ANY ) 
+		self.m_toolBar1.Hide()
+		
 		self.m_toolBar1.AddLabelTool( toolAddID, wx.EmptyString, wx.Bitmap( u"gui/add.bmp", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, u"Add files to list", wx.EmptyString ) 
 		self.m_toolBar1.AddLabelTool( toolRemoveID, wx.EmptyString, wx.Bitmap( u"gui/remove.bmp", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, u"Remove files from list", wx.EmptyString ) 
 		self.m_toolBar1.AddLabelTool( toolProcessID, wx.EmptyString, wx.Bitmap( u"gui/process.bmp", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, u"Process files", wx.EmptyString ) 
@@ -134,6 +163,9 @@ class KindleMangaFrame ( wx.Frame ):
 		
 		# Connect Events
 		self.Bind( wx.EVT_MENU, self.OnOpen, id = self.m_menuItem_open.GetId() )
+		self.m_button_add.Bind( wx.EVT_BUTTON, self.OnOpen )
+		self.m_button_rem.Bind( wx.EVT_BUTTON, self.OnRemove )
+		self.m_button_proc.Bind( wx.EVT_BUTTON, self.OnProcess )
 		self.m_textCtrl_outDir.Bind( wx.EVT_TEXT, self.OnOutDir )
 		self.m_button_outDir.Bind( wx.EVT_BUTTON, self.OnOutDirButton )
 		self.m_listCtrl1.Bind( wx.EVT_LIST_ITEM_SELECTED, self.OnSelectJob )
@@ -150,6 +182,13 @@ class KindleMangaFrame ( wx.Frame ):
 	
 	# Virtual event handlers, overide them in your derived class
 	def OnOpen( self, event ):
+		event.Skip()
+	
+	
+	def OnRemove( self, event ):
+		event.Skip()
+	
+	def OnProcess( self, event ):
 		event.Skip()
 	
 	def OnOutDir( self, event ):
@@ -171,11 +210,7 @@ class KindleMangaFrame ( wx.Frame ):
 		event.Skip()
 	
 	
-	def OnRemove( self, event ):
-		event.Skip()
 	
-	def OnProcess( self, event ):
-		event.Skip()
 	
 
 ###########################################################################
