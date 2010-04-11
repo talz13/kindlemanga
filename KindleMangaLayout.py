@@ -9,10 +9,6 @@
 
 import wx
 
-toolAddID = 1000
-toolRemoveID = 1001
-toolProcessID = 1002
-
 ###########################################################################
 ## Class KindleMangaFrame
 ###########################################################################
@@ -150,14 +146,6 @@ class KindleMangaFrame ( wx.Frame ):
 		
 		self.SetSizer( bSizer1 )
 		self.Layout()
-		self.m_toolBar1 = self.CreateToolBar( wx.TB_HORIZONTAL, wx.ID_ANY ) 
-		self.m_toolBar1.Hide()
-		
-		self.m_toolBar1.AddLabelTool( toolAddID, wx.EmptyString, wx.Bitmap( u"gui/add.bmp", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, u"Add files to list", wx.EmptyString ) 
-		self.m_toolBar1.AddLabelTool( toolRemoveID, wx.EmptyString, wx.Bitmap( u"gui/remove.bmp", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, u"Remove files from list", wx.EmptyString ) 
-		self.m_toolBar1.AddLabelTool( toolProcessID, wx.EmptyString, wx.Bitmap( u"gui/process.bmp", wx.BITMAP_TYPE_ANY ), wx.NullBitmap, wx.ITEM_NORMAL, u"Process files", wx.EmptyString ) 
-		self.m_toolBar1.Realize()
-		
 		
 		self.Centre( wx.BOTH )
 		
@@ -172,9 +160,6 @@ class KindleMangaFrame ( wx.Frame ):
 		self.m_textCtrl_series.Bind( wx.EVT_TEXT, self.OnTextSeries )
 		self.m_textCtrl_volume.Bind( wx.EVT_TEXT, self.OnTextVolume )
 		self.m_textCtrl_ch.Bind( wx.EVT_TEXT, self.OnTextChapter )
-		self.Bind( wx.EVT_TOOL, self.OnOpen, id = toolAddID )
-		self.Bind( wx.EVT_TOOL, self.OnRemove, id = toolRemoveID )
-		self.Bind( wx.EVT_TOOL, self.OnProcess, id = toolProcessID )
 	
 	def __del__( self ):
 		pass
@@ -208,9 +193,6 @@ class KindleMangaFrame ( wx.Frame ):
 	
 	def OnTextChapter( self, event ):
 		event.Skip()
-	
-	
-	
 	
 
 ###########################################################################
