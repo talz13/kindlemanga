@@ -69,13 +69,6 @@ class KindleMangaFrame ( wx.Frame ):
 		self.m_listCtrl1 = wx.ListCtrl( self.m_panel2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LC_NO_SORT_HEADER|wx.LC_REPORT|wx.LC_VRULES )
 		bSizer6.Add( self.m_listCtrl1, 1, wx.EXPAND, 5 )
 		
-		m_listBox1Choices = []
-		self.m_listBox1 = wx.ListBox( self.m_panel2, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, m_listBox1Choices, wx.LB_EXTENDED|wx.LB_HSCROLL|wx.LB_NEEDED_SB )
-		self.m_listBox1.Enable( False )
-		self.m_listBox1.Hide()
-		
-		bSizer6.Add( self.m_listBox1, 1, wx.EXPAND, 5 )
-		
 		sbSizer2 = wx.StaticBoxSizer( wx.StaticBox( self.m_panel2, wx.ID_ANY, wx.EmptyString ), wx.VERTICAL )
 		
 		fgSizer4 = wx.FlexGridSizer( 2, 2, 0, 0 )
@@ -107,6 +100,13 @@ class KindleMangaFrame ( wx.Frame ):
 		self.m_textCtrl_volume.SetMaxLength( 10 ) 
 		fgSizer4.Add( self.m_textCtrl_volume, 0, wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
 		
+		self.m_staticText8 = wx.StaticText( self.m_panel2, wx.ID_ANY, u"Chapter:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText8.Wrap( -1 )
+		fgSizer4.Add( self.m_staticText8, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
+		
+		self.m_textCtrl_ch = wx.TextCtrl( self.m_panel2, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer4.Add( self.m_textCtrl_ch, 0, wx.EXPAND, 5 )
+		
 		sbSizer2.Add( fgSizer4, 1, wx.EXPAND, 5 )
 		
 		bSizer6.Add( sbSizer2, 0, wx.EXPAND, 5 )
@@ -136,10 +136,10 @@ class KindleMangaFrame ( wx.Frame ):
 		self.Bind( wx.EVT_MENU, self.OnOpen, id = self.m_menuItem_open.GetId() )
 		self.m_textCtrl_outDir.Bind( wx.EVT_TEXT, self.OnOutDir )
 		self.m_button_outDir.Bind( wx.EVT_BUTTON, self.OnOutDirButton )
-		self.m_listCtrl1.Bind( wx.EVT_LIST_ITEM_SELECTED, self.OnSelectCtrlJob )
-		self.m_listBox1.Bind( wx.EVT_LISTBOX, self.OnSelectJob2 )
+		self.m_listCtrl1.Bind( wx.EVT_LIST_ITEM_SELECTED, self.OnSelectJob )
 		self.m_textCtrl_series.Bind( wx.EVT_TEXT, self.OnTextSeries )
 		self.m_textCtrl_volume.Bind( wx.EVT_TEXT, self.OnTextVolume )
+		self.m_textCtrl_ch.Bind( wx.EVT_TEXT, self.OnTextChapter )
 		self.Bind( wx.EVT_TOOL, self.OnOpen, id = toolAddID )
 		self.Bind( wx.EVT_TOOL, self.OnRemove, id = toolRemoveID )
 		self.Bind( wx.EVT_TOOL, self.OnProcess, id = toolProcessID )
@@ -158,16 +158,16 @@ class KindleMangaFrame ( wx.Frame ):
 	def OnOutDirButton( self, event ):
 		event.Skip()
 	
-	def OnSelectCtrlJob( self, event ):
-		event.Skip()
-	
-	def OnSelectJob2( self, event ):
+	def OnSelectJob( self, event ):
 		event.Skip()
 	
 	def OnTextSeries( self, event ):
 		event.Skip()
 	
 	def OnTextVolume( self, event ):
+		event.Skip()
+	
+	def OnTextChapter( self, event ):
 		event.Skip()
 	
 	
