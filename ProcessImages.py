@@ -59,7 +59,7 @@ def ProcessAndSave(imageFileList, targetHeight, maxWidth):
         print newfilename + ' (' + str(tmpImage.getbbox()[2]) + ', ' + str(tmpImage.getbbox()[3]) + ')'
         tmpImage.save(newfilename)
         imagecount += 1
-    print "done"
+    #print "done"
 
 def MultipleOf4(input):
     if (input % 4 == 0):
