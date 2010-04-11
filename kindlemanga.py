@@ -179,12 +179,12 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
 
     def ProcessAll(self, fileJobList, outDir):
         unknownVol = 0;
-        for job in fileJobList:
+        for index, job in enumerate(fileJobList):
             filename = job.getFilename()
             #print 'filename: ' + filename
 
             filepath = os.path.split(filename)
-            print 'filepath: ' + str(filepath)
+            #print 'filepath: ' + str(filepath)
             volume = job.getVolume()
             ch = job.getChapter()
             if (job.getSeriesName() != ''):
@@ -237,6 +237,10 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
             ProcessImages.ProcessAndSave(entries, targetHeight, maxWidth)
             KindleMangaFile.WriteMangaFiles()
             os.chdir('..')
+            progress = int((float(index + 1) / float(len(fileJobList))) * 100)
+            #print index, len(fileJobList)
+            #print progress
+            self.m_gauge_progress.SetValue(progress)
         print 'done'
 
     def printBox(self, text):
