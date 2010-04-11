@@ -8,5 +8,13 @@
 ^nbproject/project\.xml$
 ^kindlemanga\.rar$
 ^dist/*
+^dist_none/*
+^dist_dep/*
+^dist_full/*
 ^build/*
 ^msvcp90\.dll$
+\.orig\..*$
+\.orig$
+\.chg\..*$
+\.rej$
+\.conflict\~$
