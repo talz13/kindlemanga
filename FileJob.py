@@ -39,7 +39,10 @@ class FileJob:
                 chSection = names[1][chIndex:extIndex]
                 #print chSection
                 chSearch = self.myRE.search(chSection)
-                self.ch = str(int(chSection[chSearch.start():chSearch.end()]))
+                #print 'chSearch = '
+                #print chSearch
+                if (chSearch != None):
+                    self.ch = str(int(chSection[chSearch.start():chSearch.end()]))
                 #self.volume += '.' + ch
                 #print 'Chapter: ', self.ch
             except ValueError:

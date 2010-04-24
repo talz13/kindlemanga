@@ -20,7 +20,14 @@ class FileObject:
         return cmp(self.filename, other.filename)
 
     def PrintInfo(self):
-        print self.dir + ',',
-        print self.filename + ',',
-        print str(self.size) + ',',
-        print self.datetime
+        #print self.dir + ',',
+        #print self.filename + ',',
+        #print str(self.size) + ',',
+        #print self.datetime
+
+        printStr = ''
+        #if (self.dir != None):
+        printStr += str(self.dir) + ','
+        printStr += self.filename + ','
+        printStr += str(self.size) + ','
+        printStr += str(self.datetime)

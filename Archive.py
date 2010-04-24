@@ -25,7 +25,8 @@ class Archive:
         elif (self.ext == '.rar'):
             self.arc = UnRAR2.RarFile(filename)
     def Close(self):
-        self.arc.close()
+        if (self.ext == '.zip' or self.ext == '.cbz'):
+            self.arc.close()
     
     def SetTmpPath(self, tmpPath):
         self.tmpPath = tmpPath
@@ -43,10 +44,10 @@ class Archive:
             print "Abandoning, zip files nested too deep..."
         else:
             for info in infolist:
-                if (os.path.splitext(info.filename)[1].lower() == '.zip'):
+                if (os.path.splitext(info.filename)[1].lower() == '.zip' or os.path.splitext(info.filename)[1].lower() == '.cbz'):
                     nestedArchive = zipfile.ZipFile(StringIO.StringIO(archive.open(info).read()), 'r')
                     files += self.ReadZipFiles(nestedArchive, depth + 1)
-                elif (os.path.splitext(info.filename)[1] == '.rar'):
+                elif (os.path.splitext(info.filename)[1] == '.rar' or os.path.splitext(info.filename)[1].lower() == '.cbr'):
                     nestedArchive = UnRAR2.RarFile(StringIO.StringIO(archive.open(info).read()), 'r')
                     files += self.ReadRarFiles(nestedArchive, depth + 1)
                 else:
@@ -60,6 +61,7 @@ class Archive:
             print "Abandoning, rar files nested too deep..."
         else:
             extracts = archive.read_files()
+            #print str(extracts)
             for file in extracts:
                 if (os.path.splitext(file[0].filename)[1].lower() == '.zip' or os.path.splitext(file[0].filename)[1].lower() == '.cbz'):
                     nestedArchive = UnRAR2.RarFile(StringIO.StringIO(file[1]))
@@ -69,8 +71,11 @@ class Archive:
                     files += self.ReadRarFiles(nestedArchive, depth + 1)
                 else:
                     if (self.CheckImageExtension(file[0].filename)):
-                        file = FileObject.FileObject(file[0].filename, file[1], file[0].size, file[0].datetime[0:6])
-                        files.append(file)
+                        #print os.path.split(file[0].filename)
+                        #print file[0].filename, len(file[1]), str(file[0].size), str(file[0].datetime[0:6])
+                        fileObject = FileObject.FileObject(file[0].filename, file[1], file[0].size, file[0].datetime[0:6])
+                        #print file.PrintInfo()
+                        files.append(fileObject)
             return files
     
     def ReadFiles(self):

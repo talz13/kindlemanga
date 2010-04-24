@@ -50,6 +50,7 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
                 self.m_listCtrl1.SetStringItem(listIndex, 1, self.fileList[-1].getSeriesName())
                 self.m_listCtrl1.SetStringItem(listIndex, 2, self.fileList[-1].getVolume())
                 self.m_listCtrl1.SetStringItem(listIndex, 3, self.fileList[-1].getChapter())
+                print 'Added ' + filename
             #print self.filenames
         dlg.Destroy()
         self.resizeCols()
@@ -63,6 +64,7 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
         selections = self.getSelections()
         #print selections
         for index in selections:
+            print 'Removed ' + s.path.split(self.fileList[index].getFilename())[1]
             del self.fileList[index]
             self.m_listCtrl1.DeleteItem(index)
         self.resizeCols()
@@ -208,7 +210,9 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
             #
             #imageDir = os.path.splitext(filepath[1])[0]
             #tempImageDir = raw_input('set imageDir: [' + imageDir + ']: ')
-            tempImageDir = seriesName.replace(' ', '_') + '-vol.' + ('%03d' % int(volume))
+            tempImageDir = seriesName.replace(' ', '_')
+            if (len(volume) > 0):
+                tempImageDir += '-vol.' + ('%03d' % int(volume))
             if (len(ch) > 0):
                 tempImageDir += '-ch.' + ('%03d' % int(ch))
                 
