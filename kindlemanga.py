@@ -62,9 +62,9 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
 
     def OnRemove(self, event):
         selections = self.getSelections()
-        #print selections
+        selections.reverse()
         for index in selections:
-            print 'Removed ' + s.path.split(self.fileList[index].getFilename())[1]
+            print 'Removed ' + os.path.split(self.fileList[index].getFilename())[1]
             del self.fileList[index]
             self.m_listCtrl1.DeleteItem(index)
         self.resizeCols()

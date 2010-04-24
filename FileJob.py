@@ -19,7 +19,10 @@ class FileJob:
         self.seriesName = names[0][names[0].rindex('\\') + 1:len(names[0])]
         #print self.seriesName
 
-        print names[1]
+        vIndex = 0
+        chIndex = 0
+
+       # print names[1]
         try:
             extIndex = names[1].rindex ('.')
             try:
@@ -35,14 +38,14 @@ class FileJob:
 
             try:
                 chIndex = names[1].lower().rindex('c')
-                #if (chIndex > vIndex and chIndex < extIndex):
-                chSection = names[1][chIndex:extIndex]
-                #print chSection
-                chSearch = self.myRE.search(chSection)
-                #print 'chSearch = '
-                #print chSearch
-                if (chSearch != None):
-                    self.ch = str(int(chSection[chSearch.start():chSearch.end()]))
+                #print chIndex
+                if (chIndex > vIndex and chIndex < extIndex):
+                    chSection = names[1][chIndex:extIndex]
+                    #print chSection
+                    chSearch = self.myRE.search(chSection)
+                    #print 'chSearch = ', chSearch
+                    if (chSearch != None):
+                        self.ch = str(int(chSection[chSearch.start():chSearch.end()]))
                 #self.volume += '.' + ch
                 #print 'Chapter: ', self.ch
             except ValueError:
