@@ -9,18 +9,23 @@ import FileJob
 import ProcessImages
 import KindleMangaFile
 import KindleMangaLayout
+import ConfigParser
 
 class MainFrame(KindleMangaLayout.KindleMangaFrame):
 
     fileList = []
     outDir = ''
+    win = 'win'
+    linux = 'linux'
 
     def __init__(self, parent):
         KindleMangaLayout.KindleMangaFrame.__init__(self, parent)
-        sys.stdout = self.m_textCtrl_console
-        sys.stderr = self.m_textCtrl_console
-        
-        self.m_textCtrl_outDir.SetValue(os.getenv('USERPROFILE') + '\\My Documents')
+        #sys.stdout = self.m_textCtrl_console
+        #sys.stderr = self.m_textCtrl_console
+
+        self.loadPrefs()
+
+        self.m_textCtrl_outDir.SetValue(self.outDir)
         self.m_listCtrl1.InsertColumn(0, 'Filename')
         self.m_listCtrl1.InsertColumn(1, 'Series')
         self.m_listCtrl1.InsertColumn(2, 'Volume')
@@ -28,6 +33,9 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
         self.resizeCols()
         #self.m_listCtrl1.SetColumnWidth(0, wx.LIST_AUTOSIZE)
 
+    def OnClose(self, event):
+        self.savePrefs()
+        self.Destroy()
 
     def OnOpen(self, event):
         self.dirname = ''
@@ -58,7 +66,7 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
             if (self.m_listCtrl1.GetItemCount() != 0):
                 self.m_listCtrl1.Select(0)
                 self.OnSelectJob(event)
-        return [self.dirname, self.filenames]
+        #return [self.dirname, self.filenames]
 
     def OnRemove(self, event):
         selections = self.getSelections()
@@ -199,8 +207,6 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
                 #if (not os.path.isdir(outDir)):
                 #    self.dialog_dir_not_found.show()
                 tempDirName = outDir
-            else:
-                tempDirName = os.getenv('APPDATA') + '\\' + 'kindleMangaTemp'
 
             tempDir = tempDirName + '\\' # + seriesName
             print tempDir
@@ -269,6 +275,41 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
             self.m_listCtrl1.SetColumnWidth(1, wx.LIST_AUTOSIZE_USEHEADER)
             self.m_listCtrl1.SetColumnWidth(2, wx.LIST_AUTOSIZE_USEHEADER)
             self.m_listCtrl1.SetColumnWidth(3, wx.LIST_AUTOSIZE_USEHEADER)
+
+    def loadPrefs(self):
+        try:
+            config = ConfigParser.ConfigParser()
+            config.read('settings.cfg')
+            if (len(config.get('PrevState', 'outDir')) > 0):
+                self.outDir = config.get('PrevState', 'outDir')
+            else:
+                if (sys.platform.find(win) >= 0):
+                    if (os.path.isdir(os.getenv('USERPROFILE') + '\\My Documents')):
+                        self.outDir = os.getenv('USERPROFILE') + '\\My Documents'
+                elif (sys.platform.find(linux) >= 0):
+                    if (os.path.isdir(os.getenv('HOME'))):
+                        self.outDir = os.getenv('HOME')
+                
+        except (ConfigParser.NoSectionError, ConfigParser.NoOptionError, ConfigParser.ParsingError):
+            # File not found
+            #print sys.exc_info()[0], sys.exc_info()[1]
+            if (sys.platform.find(win) >= 0):
+                if (os.path.isdir(os.getenv('USERPROFILE') + '\\My Documents')):
+                    self.outDir = os.getenv('USERPROFILE') + '\\My Documents'
+            elif (sys.platform.find(linux) >= 0):
+                if (os.path.isdir(os.getenv('HOME'))):
+                    self.outDir = os.getenv('HOME')
+            #pass
+
+    def savePrefs(self):
+        #try:
+        config = ConfigParser.ConfigParser()
+        config.add_section('PrevState')
+        config.set('PrevState', 'outDir', self.outDir)
+
+        with open('settings.cfg', 'wb') as configfile:
+            config.write(configfile)
+        #except
 
 class Gui(wx.App):
     def OnInit(self):

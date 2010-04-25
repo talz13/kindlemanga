@@ -18,3 +18,4 @@
 \.chg\..*$
 \.rej$
 \.conflict\~$
+^settings\.cfg$

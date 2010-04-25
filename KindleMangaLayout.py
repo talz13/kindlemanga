@@ -150,6 +150,7 @@ class KindleMangaFrame ( wx.Frame ):
 		self.Centre( wx.BOTH )
 		
 		# Connect Events
+		self.Bind( wx.EVT_CLOSE, self.OnClose )
 		self.Bind( wx.EVT_MENU, self.OnOpen, id = self.m_menuItem_open.GetId() )
 		self.m_button_add.Bind( wx.EVT_BUTTON, self.OnOpen )
 		self.m_button_rem.Bind( wx.EVT_BUTTON, self.OnRemove )
@@ -166,6 +167,9 @@ class KindleMangaFrame ( wx.Frame ):
 	
 	
 	# Virtual event handlers, overide them in your derived class
+	def OnClose( self, event ):
+		event.Skip()
+	
 	def OnOpen( self, event ):
 		event.Skip()
 	
