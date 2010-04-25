@@ -20,8 +20,8 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
 
     def __init__(self, parent):
         KindleMangaLayout.KindleMangaFrame.__init__(self, parent)
-        #sys.stdout = self.m_textCtrl_console
-        #sys.stderr = self.m_textCtrl_console
+        sys.stdout = self.m_textCtrl_console
+        sys.stderr = self.m_textCtrl_console
 
         self.loadPrefs()
 
