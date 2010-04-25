@@ -52,7 +52,7 @@ class FileJob:
                             break
                         #print 'Volume: ', self.volume
                     except ValueError:
-                        print 'ValueError'
+                        #print 'ValueError'
                         self.volume = ''
                         break
             except ValueError:
