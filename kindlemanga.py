@@ -283,20 +283,20 @@ class MainFrame(KindleMangaLayout.KindleMangaFrame):
             if (len(config.get('PrevState', 'outDir')) > 0):
                 self.outDir = config.get('PrevState', 'outDir')
             else:
-                if (sys.platform.find(win) >= 0):
+                if (sys.platform.find(self.win) >= 0):
                     if (os.path.isdir(os.getenv('USERPROFILE') + '\\My Documents')):
                         self.outDir = os.getenv('USERPROFILE') + '\\My Documents'
-                elif (sys.platform.find(linux) >= 0):
+                elif (sys.platform.find(self.linux) >= 0):
                     if (os.path.isdir(os.getenv('HOME'))):
                         self.outDir = os.getenv('HOME')
                 
         except (ConfigParser.NoSectionError, ConfigParser.NoOptionError, ConfigParser.ParsingError):
             # File not found
             #print sys.exc_info()[0], sys.exc_info()[1]
-            if (sys.platform.find(win) >= 0):
+            if (sys.platform.find(self.win) >= 0):
                 if (os.path.isdir(os.getenv('USERPROFILE') + '\\My Documents')):
                     self.outDir = os.getenv('USERPROFILE') + '\\My Documents'
-            elif (sys.platform.find(linux) >= 0):
+            elif (sys.platform.find(self.linux) >= 0):
                 if (os.path.isdir(os.getenv('HOME'))):
                     self.outDir = os.getenv('HOME')
             #pass
