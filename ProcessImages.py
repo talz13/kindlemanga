@@ -13,6 +13,8 @@ def ProcessAndSave(imageFileList, targetHeight, maxWidth):
             tmpImage = file.data
         else:
             tmpImage = Image.open(StringIO.StringIO(file.data))
+        if (tmpImage is None):
+            continue
         width = tmpImage.getbbox()[2]
         height = tmpImage.getbbox()[3]
 
